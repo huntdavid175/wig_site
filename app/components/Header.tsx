@@ -14,7 +14,7 @@ const navItems = [
 
 export default function Header() {
   const pathname = usePathname();
-  const { itemCount } = useCart();
+  const { itemCount, openCart } = useCart();
 
   return (
     <header className="bg-white w-full">
@@ -26,10 +26,10 @@ export default function Header() {
               className="text-3xl font-bold text-primary tracking-tight"
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
-              fab.
+              PB
             </span>
             <span className="text-[9px] text-primary tracking-[0.25em] uppercase -mt-1 font-medium">
-              Skin Science
+              PonyClub
             </span>
           </div>
         </div>
@@ -66,7 +66,12 @@ export default function Header() {
           </button>
 
           {/* Cart */}
-          <button className="relative text-primary hover:opacity-70 transition-opacity">
+          <button
+            type="button"
+            onClick={openCart}
+            className="relative text-primary hover:opacity-70 transition-opacity"
+            aria-label="Open cart"
+          >
             <ShoppingBag size={22} strokeWidth={1.5} />
             <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-medium">
               {itemCount}

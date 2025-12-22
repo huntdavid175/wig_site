@@ -29,10 +29,10 @@ export default function Footer() {
                 className="text-3xl font-bold text-white tracking-tight"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
-                fab.
+                PB
               </span>
               <span className="text-[10px] text-white/70 tracking-[0.25em] uppercase -mt-1 font-medium">
-                Skin Science
+                PonyClub
               </span>
             </div>
 
@@ -132,7 +132,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs text-white/60">
-          <div>© {new Date().getFullYear()} fab. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} PonyClub. All rights reserved.</div>
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-white transition-colors">
               Privacy

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "./components/cart/CartProvider";
-import { ToastProvider } from "./components/toast/ToastProvider";
 import AnnouncementBar from "./components/AnnouncementBar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import CartDrawer from "./components/cart/CartDrawer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -33,18 +33,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${playfair.variable} antialiased font-sans`}>
-        <ToastProvider>
-          <CartProvider>
-            <div className="min-h-screen bg-white flex flex-col">
-              <AnnouncementBar />
-              <div className="sticky top-0 z-50 border-b border-neutral-100 bg-white/90 backdrop-blur">
-                <Header />
-              </div>
-              <main className="flex-1">{children}</main>
-              <Footer />
+        {/* ToastProvider is disabled for now since the cart drawer is the primary feedback UI. */}
+        <CartProvider>
+          <div className="min-h-screen bg-white flex flex-col">
+            <AnnouncementBar />
+            <div className="sticky top-0 z-50 border-b border-neutral-100 bg-white/90 backdrop-blur">
+              <Header />
             </div>
-          </CartProvider>
-        </ToastProvider>
+            <CartDrawer />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </CartProvider>
       </body>
     </html>
   );

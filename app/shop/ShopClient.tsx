@@ -3,7 +3,6 @@
 import { Check, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "../components/cart/CartProvider";
-import { useToast } from "../components/toast/ToastProvider";
 import QuickViewModal, {
   type QuickViewProduct,
 } from "../components/modals/QuickViewModal";
@@ -18,6 +17,13 @@ type Product = {
   images?: string[];
 };
 
+const PRODUCT_IMAGES = [
+  "/images/pony_2.jpg",
+  "/images/pony_8.jpg",
+  "/images/pony_3.jpg",
+  "/images/pony_10.jpg",
+] as const;
+
 const PRODUCTS: Product[] = [
   {
     id: "p-1",
@@ -25,16 +31,16 @@ const PRODUCTS: Product[] = [
     price: 249,
     salePrice: 219,
     colors: ["Natural", "1B"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero.jpg", "/images/hair_hero1.png", "/images/hair_hero.jpg"],
+    imageUrl: PRODUCT_IMAGES[0],
+    images: [PRODUCT_IMAGES[0], PRODUCT_IMAGES[1], PRODUCT_IMAGES[2]],
   },
   {
     id: "p-2",
     name: "Raw Burmese Curly Bundles (3pc)",
     price: 189,
     colors: ["Natural", "1B"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero1.png", "/images/hair_hero.jpg", "/images/hair_hero1.png"],
+    imageUrl: PRODUCT_IMAGES[1],
+    images: [PRODUCT_IMAGES[1], PRODUCT_IMAGES[2], PRODUCT_IMAGES[3]],
   },
   {
     id: "p-3",
@@ -42,16 +48,16 @@ const PRODUCTS: Product[] = [
     price: 79,
     salePrice: 69,
     colors: ["Natural"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero.jpg", "/images/hair_hero1.png"],
+    imageUrl: PRODUCT_IMAGES[2],
+    images: [PRODUCT_IMAGES[2], PRODUCT_IMAGES[3], PRODUCT_IMAGES[0]],
   },
   {
     id: "p-4",
     name: "Straight Wig – Glueless Ready",
     price: 219,
     colors: ["Natural", "1B", "2"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero1.png", "/images/hair_hero.jpg"],
+    imageUrl: PRODUCT_IMAGES[3],
+    images: [PRODUCT_IMAGES[3], PRODUCT_IMAGES[0], PRODUCT_IMAGES[1]],
   },
   {
     id: "p-5",
@@ -59,24 +65,24 @@ const PRODUCTS: Product[] = [
     price: 169,
     salePrice: 149,
     colors: ["Natural", "1B", "4"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero.jpg", "/images/hair_hero1.png"],
+    imageUrl: PRODUCT_IMAGES[0],
+    images: [PRODUCT_IMAGES[0], PRODUCT_IMAGES[2], PRODUCT_IMAGES[3]],
   },
   {
     id: "p-6",
     name: "HD Lace Frontal (13x4)",
     price: 119,
     colors: ["Natural"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero1.png", "/images/hair_hero.jpg"],
+    imageUrl: PRODUCT_IMAGES[1],
+    images: [PRODUCT_IMAGES[1], PRODUCT_IMAGES[3], PRODUCT_IMAGES[0]],
   },
   {
     id: "p-7",
     name: "Kinky Curly Wig – Natural Look",
     price: 239,
     colors: ["Natural", "1B"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero.jpg", "/images/hair_hero1.png"],
+    imageUrl: PRODUCT_IMAGES[2],
+    images: [PRODUCT_IMAGES[2], PRODUCT_IMAGES[0], PRODUCT_IMAGES[1]],
   },
   {
     id: "p-8",
@@ -84,16 +90,16 @@ const PRODUCTS: Product[] = [
     price: 199,
     salePrice: 179,
     colors: ["Natural", "1B", "2"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero1.png", "/images/hair_hero.jpg"],
+    imageUrl: PRODUCT_IMAGES[3],
+    images: [PRODUCT_IMAGES[3], PRODUCT_IMAGES[1], PRODUCT_IMAGES[2]],
   },
   {
     id: "p-9",
     name: "HD Lace Frontal Wig (Curly)",
     price: 259,
     colors: ["Natural", "1B"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero.jpg", "/images/hair_hero1.png"],
+    imageUrl: PRODUCT_IMAGES[0],
+    images: [PRODUCT_IMAGES[0], PRODUCT_IMAGES[1], PRODUCT_IMAGES[3]],
   },
   {
     id: "p-10",
@@ -101,24 +107,24 @@ const PRODUCTS: Product[] = [
     price: 229,
     salePrice: 199,
     colors: ["Natural", "1B", "4"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero1.png", "/images/hair_hero.jpg"],
+    imageUrl: PRODUCT_IMAGES[1],
+    images: [PRODUCT_IMAGES[1], PRODUCT_IMAGES[2], PRODUCT_IMAGES[0]],
   },
   {
     id: "p-11",
     name: "Lace Closure (5x5) – HD",
     price: 99,
     colors: ["Natural"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero.jpg", "/images/hair_hero1.png"],
+    imageUrl: PRODUCT_IMAGES[2],
+    images: [PRODUCT_IMAGES[2], PRODUCT_IMAGES[3], PRODUCT_IMAGES[1]],
   },
   {
     id: "p-12",
     name: "Straight Bundles (3pc)",
     price: 159,
     colors: ["Natural", "1B", "2"],
-    imageUrl: "/images/hair_hero.jpg",
-    images: ["/images/hair_hero1.png", "/images/hair_hero.jpg"],
+    imageUrl: PRODUCT_IMAGES[3],
+    images: [PRODUCT_IMAGES[3], PRODUCT_IMAGES[0], PRODUCT_IMAGES[2]],
   },
 ];
 
@@ -160,7 +166,7 @@ function toQuickViewProduct(p: Product): QuickViewProduct {
     images:
       p.images?.length && p.images.some(Boolean)
         ? p.images
-        : [p.imageUrl, "/images/hair_hero1.png", p.imageUrl],
+        : [p.imageUrl, PRODUCT_IMAGES[1], p.imageUrl],
     options: [
       { name: "Length", values: ['16"', '18"', '20"', '22"'] },
       { name: "Color", values: p.colors.length ? p.colors : ["Natural"] },
@@ -299,7 +305,6 @@ function FilterSidebar({
 
 export default function ShopClient() {
   const { addItem } = useCart();
-  const { show } = useToast();
 
   const allColors = useMemo(() => uniqueColors(PRODUCTS), []);
   const [selectedColors, setSelectedColors] = useState<Set<string>>(new Set());
@@ -554,10 +559,14 @@ export default function ShopClient() {
                         type="button"
                         onClick={() => {
                           addItem(
-                            { id: p.id, name: p.name, price: effectivePrice(p) },
+                            {
+                              id: p.id,
+                              name: p.name,
+                              price: effectivePrice(p),
+                              imageUrl: p.imageUrl,
+                            },
                             1
                           );
-                          show({ title: "Added to cart", description: p.name });
                         }}
                         className="rounded-xl bg-primary text-white text-sm font-medium py-3 hover:bg-primary-hover transition-colors"
                       >
@@ -644,14 +653,11 @@ export default function ShopClient() {
               id: `${product.id}:${variantId}`,
               name: product.name,
               price: product.price,
+              imageUrl: product.images?.[0],
               variant: variantLabel,
             },
             qty
           );
-          show({
-            title: "Added to cart",
-            description: `${product.name} (${variantLabel})`,
-          });
           setQuickViewOpen(false);
         }}
       />

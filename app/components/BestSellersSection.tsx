@@ -5,9 +5,13 @@ import Image from "next/image";
 import { useCart } from "./cart/CartProvider";
 import { useMemo, useState } from "react";
 import QuickViewModal, { type QuickViewProduct } from "./modals/QuickViewModal";
-import { useToast } from "./toast/ToastProvider";
 
-const CARD_IMAGES = ["/images/hair_hero.jpg", "/images/hair_hero1.png"] as const;
+const CARD_IMAGES = [
+  "/images/pony_2.jpg",
+  "/images/pony_8.jpg",
+  "/images/pony_3.jpg",
+  "/images/pony_10.jpg",
+] as const;
 
 const bestSellers: QuickViewProduct[] = [
   {
@@ -16,7 +20,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 249,
     description:
       "Soft, natural density with a flawless hairline. Pre-bleached knots feel + beginner-friendly wear.",
-    images: [CARD_IMAGES[0], CARD_IMAGES[1], CARD_IMAGES[0]],
+    images: [CARD_IMAGES[0], CARD_IMAGES[1], CARD_IMAGES[2]],
     options: [
       { name: "Length", values: ["18\"", "20\"", "22\"", "24\""] },
       { name: "Lace", values: ["HD", "Transparent"] },
@@ -29,7 +33,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 189,
     description:
       "Defined curls with premium softness and minimal shedding. Perfect for full installs or custom units.",
-    images: [CARD_IMAGES[1], CARD_IMAGES[0], CARD_IMAGES[1]],
+    images: [CARD_IMAGES[1], CARD_IMAGES[2], CARD_IMAGES[3]],
     options: [
       { name: "Length", values: ["16\"", "18\"", "20\"", "22\""] },
       { name: "Bundles", values: ["3pc", "4pc"] },
@@ -41,7 +45,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 79,
     description:
       "Natural parting space with clean blending. Great for low-maintenance installs and protective styling.",
-    images: [CARD_IMAGES[0], CARD_IMAGES[1]],
+    images: [CARD_IMAGES[2], CARD_IMAGES[3], CARD_IMAGES[0]],
     options: [
       { name: "Texture", values: ["Straight", "Body Wave", "Curly"] },
       { name: "Color", values: ["Natural", "1B"] },
@@ -53,7 +57,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 219,
     description:
       "Silky straight finish with an effortless melt. Adjustable band + combs for secure daily wear.",
-    images: [CARD_IMAGES[1], CARD_IMAGES[0]],
+    images: [CARD_IMAGES[3], CARD_IMAGES[0], CARD_IMAGES[1]],
     options: [
       { name: "Length", values: ["18\"", "20\"", "22\""] },
       { name: "Lace", values: ["HD", "Transparent"] },
@@ -65,7 +69,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 169,
     description:
       "Bouncy deep wave pattern that stays defined. Easy to refresh with water + mousse.",
-    images: [CARD_IMAGES[0], CARD_IMAGES[1]],
+    images: [CARD_IMAGES[0], CARD_IMAGES[2], CARD_IMAGES[3]],
     options: [
       { name: "Length", values: ["16\"", "18\"", "20\"", "22\""] },
       { name: "Bundles", values: ["3pc", "4pc"] },
@@ -77,7 +81,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 119,
     description:
       "Wide lace space for versatile styling. Ultra-thin HD lace for the most natural blend.",
-    images: [CARD_IMAGES[1], CARD_IMAGES[0]],
+    images: [CARD_IMAGES[1], CARD_IMAGES[3], CARD_IMAGES[0]],
     options: [
       { name: "Texture", values: ["Straight", "Body Wave", "Curly"] },
       { name: "Color", values: ["Natural", "1B"] },
@@ -89,7 +93,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 239,
     description:
       "Natural texture with gorgeous volume. Perfect for effortless wash-and-go styling.",
-    images: [CARD_IMAGES[0], CARD_IMAGES[1]],
+    images: [CARD_IMAGES[2], CARD_IMAGES[0], CARD_IMAGES[1]],
     options: [
       { name: "Length", values: ["16\"", "18\"", "20\""] },
       { name: "Density", values: ["180%", "200%"] },
@@ -101,7 +105,7 @@ const bestSellers: QuickViewProduct[] = [
     price: 199,
     description:
       "Easy install with a natural finish. Designed for comfort, security, and quick styling.",
-    images: [CARD_IMAGES[1], CARD_IMAGES[0]],
+    images: [CARD_IMAGES[3], CARD_IMAGES[1], CARD_IMAGES[2]],
     options: [
       { name: "Length", values: ["18\"", "20\"", "22\""] },
       { name: "Texture", values: ["Straight", "Body Wave"] },
@@ -119,7 +123,6 @@ function formatPrice(price: number) {
 
 export default function BestSellersSection() {
   const { addItem } = useCart();
-  const { show } = useToast();
   const [quickViewOpen, setQuickViewOpen] = useState(false);
   const [activeProductId, setActiveProductId] = useState<string | null>(null);
 
@@ -206,10 +209,14 @@ export default function BestSellersSection() {
                       type="button"
                       onClick={() =>
                         (() => {
-                          addItem({ id: p.id, name: p.name, price: p.price }, 1);
-                          show(
-                            { title: "Added to cart", description: p.name },
-                            { durationMs: 3200 }
+                          addItem(
+                            {
+                              id: p.id,
+                              name: p.name,
+                              price: p.price,
+                              imageUrl: p.images?.[0],
+                            },
+                            1
                           );
                         })()
                       }
@@ -235,13 +242,10 @@ export default function BestSellersSection() {
               id: `${product.id}:${variantId}`,
               name: product.name,
               price: product.price,
+              imageUrl: product.images?.[0],
               variant: variantLabel,
             },
             qty
-          );
-          show(
-            { title: "Added to cart", description: `${product.name} (${variantLabel})` },
-            { durationMs: 3200 }
           );
           setQuickViewOpen(false);
         }}

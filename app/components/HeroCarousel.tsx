@@ -1,30 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 export default function HeroCarousel() {
-  const [shouldAutoplay, setShouldAutoplay] = useState(true);
-
-  useEffect(() => {
-    // Respect reduced-motion and data-saver for a more premium UX
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-    const saveData =
-      typeof navigator !== "undefined" &&
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (navigator as any).connection?.saveData === true;
-
-    if (prefersReducedMotion || saveData) setShouldAutoplay(false);
-  }, []);
-
   return (
     <section className="relative w-full">
       {/* Mobile Hero (match Our Story hero) */}
       <div className="md:hidden relative h-[420px] sm:h-[520px] overflow-hidden">
-        {shouldAutoplay ? (
+        {/*
           <video
             className="absolute inset-0 h-full w-full object-cover"
             src="/videos/hair_video1.mp4"
@@ -35,16 +18,15 @@ export default function HeroCarousel() {
             preload="metadata"
             poster="/images/hair_hero.jpg"
           />
-        ) : (
-          <Image
-            src="/images/hair_hero.jpg"
-            alt="Hero"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        )}
+        */}
+        <Image
+          src="/images/pony_1.jpg"
+          alt="Hero"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
 
         <div className="absolute inset-0 bg-black/45" />
         <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/35 to-transparent" />
@@ -53,17 +35,17 @@ export default function HeroCarousel() {
           <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 pb-10 sm:pb-12">
             <div className="max-w-2xl">
               <p className="text-white/80 text-sm tracking-widest uppercase">
-                Premium hair, modern finish
+                Ponytail extensions
               </p>
               <h1
                 className="mt-3 text-white text-4xl sm:text-5xl italic leading-tight"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
               >
-                Look within yourself and discover
+                Your best ponytail, instantly
               </h1>
               <p className="mt-4 text-white/85 text-sm sm:text-base leading-relaxed max-w-xl">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when.
+                Soft, natural-looking ponytail hair for effortless length and
+                volume—wrap, clip, and go in minutes.
               </p>
 
               <button className="mt-7 inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-medium text-white hover:bg-primary-hover transition-colors">
@@ -104,12 +86,12 @@ export default function HeroCarousel() {
               className="text-5xl lg:text-6xl xl:text-7xl text-primary leading-[1.1] mb-8 italic font-normal"
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
-              Look within yourself and discover
+              Your best ponytail, instantly
             </h1>
 
             <p className="text-primary text-base leading-relaxed mb-10 max-w-sm">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when.
+              Soft, natural ponytail hair that blends beautifully—secure hold,
+              smooth finish, and all-day confidence.
             </p>
 
             <button className="bg-primary hover:bg-primary-hover text-white px-14 py-4 text-sm font-medium tracking-wide transition-all duration-300">
@@ -122,7 +104,7 @@ export default function HeroCarousel() {
         <div className="w-1/2 relative bg-[#f5f2e8]">
           {/* Image container with curved RIGHT edge */}
           <div className="absolute inset-0 overflow-hidden rounded-r-[9999px]">
-            {shouldAutoplay ? (
+            {/*
               <video
                 className="absolute inset-0 h-full w-full object-cover object-center"
                 src="/videos/hair_video1.mp4"
@@ -133,16 +115,15 @@ export default function HeroCarousel() {
                 preload="metadata"
                 poster="/images/hair_hero.jpg"
               />
-            ) : (
-              <Image
-                src="/images/hair_hero.jpg"
-                alt="Hero"
-                fill
-                priority
-                className="object-cover object-center"
-                sizes="50vw"
-              />
-            )}
+            */}
+            <Image
+              src="/images/pony_3.jpg"
+              alt="Hero"
+              fill
+              priority
+              className="object-cover object-top"
+              sizes="50vw"
+            />
             {/* subtle overlay to match the reference contrast */}
             <div className="absolute inset-0 bg-black/5" />
           </div>
