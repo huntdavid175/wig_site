@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PBPonyClub QA Testing Project
 
-## Getting Started
+This project demonstrates my ability to perform end-to-end quality assurance testing for a real-world e-commerce application through manual testing, defect tracking, API validation, and test documentation.
 
-First, run the development server:
+The project was created to simulate a real QA workflow and showcase my transition from software development into QA engineering.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Application Under Test
+**Website:** https://wig-site.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application is an e-commerce platform that allows users to:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Browse products
+- View product details
+- Add products to cart
+- Update cart quantities
+- Proceed through checkout
+- Use the platform across multiple devices and browsers
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# Testing Scope
 
-To learn more about Next.js, take a look at the following resources:
+The following modules were tested:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Homepage & Navigation
+- Product Listing
+- Product Details
+- Shopping Cart
+- Checkout Flow
+- Responsive Design
+- Cross-browser Compatibility
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# Testing Approach
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Manual Testing
+Performed end-to-end testing of critical user journeys including:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Product browsing
+- Cart functionality
+- Checkout process
+- Form validation
+- Navigation testing
+
+---
+
+## Exploratory Testing
+Performed exploratory testing to identify unexpected issues, UI inconsistencies, and edge case failures.
+
+Examples:
+- Refreshing checkout page
+- Adding large product quantities
+- Testing invalid form inputs
+
+---
+
+## API Testing
+Used Postman to validate backend endpoints and verify:
+
+- Status codes
+- Response payloads
+- Error handling
+- API reliability
+
+---
+
+## Regression Testing
+Re-tested critical functionality after identifying issues to ensure no regressions were introduced.
+
+---
+
+## Test Automation (Optional/Planned)
+Planned automation coverage for critical user flows using:
+
+- Cypress / Playwright
+
+Potential automated flows:
+- Add to cart
+- Checkout flow
+- Product navigation
+
+---
+
+# QA Artifacts
+
+## Test Plan
+Detailed test plan document outlining testing strategy, scope, environments, risks, and deliverables.
+
+**Link:** [Insert Test Plan Link Here]
+
+---
+
+## Test Cases
+Created and executed structured test cases covering functional, negative, and edge scenarios.
+
+**Link:** [Insert Google Sheets Link Here]
+
+---
+
+## Bug Tracking
+All identified bugs were documented and tracked using JIRA.
+
+Bug reports include:
+
+- Steps to reproduce
+- Expected result
+- Actual result
+- Severity
+- Screenshots/videos
+
+**Link:** [Insert JIRA Link or Screenshots Folder]
+
+---
+
+## API Collection
+Postman API test collection
+
+**Link:** [Insert Postman Collection Link]
+
+---
+
+# Tools Used
+
+- JIRA
+- Postman
+- Google Sheets
+- Google Docs / Microsoft Word
+- Chrome DevTools
+- GitHub
+
+---
+
+# Test Execution Summary
+
+| Metric | Count |
+|---------|--------|
+| Total Test Cases | 25 |
+| Passed | X |
+| Failed | X |
+| Blocked | X |
+| Bugs Logged | X |
+
+*(Update these numbers after completing execution.)*
+
+---
+
+# Key QA Skills Demonstrated
+
+- Manual Testing
+- Regression Testing
+- Exploratory Testing
+- Bug Reporting
+- JIRA Workflow
+- API Testing
+- Test Documentation
+- Cross-browser Testing
+- Responsive Testing
+- QA Process Understanding
+
+---
+
+# Project Goal
+
+This project was created to demonstrate practical QA experience by applying real testing workflows to a live application and documenting the process from test planning to defect reporting.
