@@ -2,6 +2,7 @@
 
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef } from "react";
 import { useCart } from "./CartProvider";
 
@@ -14,6 +15,7 @@ function money(n: number) {
 }
 
 export default function CartDrawer() {
+  const router = useRouter();
   const {
     isOpen,
     closeCart,
@@ -219,7 +221,10 @@ export default function CartDrawer() {
             </div>
             <button
               type="button"
-              onClick={closeCart}
+              onClick={() => {
+                closeCart();
+                router.push("/checkout");
+              }}
               className="mt-4 w-full rounded-xl bg-primary px-5 py-3 text-sm font-medium text-white hover:bg-primary-hover transition-colors disabled:opacity-60"
               disabled={items.length === 0}
             >

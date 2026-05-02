@@ -94,7 +94,7 @@ Detailed test plan document outlining testing strategy, scope, environments, ris
 ## Test Cases
 Created and executed structured test cases covering functional, negative, and edge scenarios.
 
-**Link:** [Insert Google Sheets Link Here]
+**Link:** [https://docs.google.com/spreadsheets/d/1O2kE5klGxMMaAgi1L2qAT1lnJqrBy5pGvW9ziX2g-fE/edit?usp=sharing]
 
 ---
 
@@ -136,13 +136,12 @@ Postman API test collection
 
 | Metric | Count |
 |---------|--------|
-| Total Test Cases | 25 |
-| Passed | X |
-| Failed | X |
-| Blocked | X |
-| Bugs Logged | X |
+| Total Test Cases | 29 |
+| Passed | 22 |
+| Failed | 4 |
+| Blocked | 3 |
+| Bugs Logged | 4 |
 
-*(Update these numbers after completing execution.)*
 
 ---
 
@@ -153,7 +152,7 @@ Postman API test collection
 - Exploratory Testing
 - Bug Reporting
 - JIRA Workflow
-- API Testing
+- API Testing*
 - Test Documentation
 - Cross-browser Testing
 - Responsive Testing
