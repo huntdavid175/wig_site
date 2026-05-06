@@ -62,29 +62,18 @@ export default function Header() {
   return (
     <header className="bg-white w-full relative">
       <div className="max-w-[1400px] mx-auto flex items-center justify-between py-5 px-6 lg:px-12">
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            className="md:hidden text-primary hover:opacity-70 transition-opacity"
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={22} strokeWidth={1.5} />
-          </button>
-
-          {/* Logo */}
-          <div className="shrink-0">
-            <div className="flex flex-col">
-              <span
-                className="text-3xl font-bold text-primary tracking-tight"
-                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-              >
-                PB
-              </span>
-              <span className="text-[9px] text-primary tracking-[0.25em] uppercase -mt-1 font-medium">
-                PonyClub
-              </span>
-            </div>
+        {/* Logo */}
+        <div className="shrink-0">
+          <div className="flex flex-col">
+            <span
+              className="text-3xl font-bold text-primary tracking-tight"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              PB
+            </span>
+            <span className="text-[9px] text-primary tracking-[0.25em] uppercase -mt-1 font-medium">
+              PonyClub
+            </span>
           </div>
         </div>
 
@@ -114,6 +103,15 @@ export default function Header() {
 
         {/* Right Icons */}
         <div className="flex items-center gap-5">
+          <button
+            type="button"
+            className="md:hidden text-primary hover:opacity-70 transition-opacity"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu size={22} strokeWidth={1.5} />
+          </button>
+
           {/* Search */}
           <button className="text-primary hover:opacity-70 transition-opacity">
             <Search size={22} strokeWidth={1.5} />
@@ -153,8 +151,8 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
-          className={`absolute left-0 top-0 h-full w-[85%] max-w-xs bg-white shadow-2xl transition-transform duration-300 ${
-            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          className={`absolute right-0 top-0 h-full w-[85%] max-w-xs bg-white opacity-100 shadow-2xl transition-transform duration-300 ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
