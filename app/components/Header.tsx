@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, ShoppingBag, ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useCart } from "./cart/CartProvider";
 
 const navItems = [
@@ -17,7 +18,12 @@ export default function Header() {
   const pathname = usePathname();
   const { itemCount, openCart } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -59,9 +65,71 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
+  const mobileMenuDrawer =
+    isMounted &&
+    createPortal(
+      <div
+        className={`md:hidden fixed inset-0 z-[9998] overflow-hidden ${
+          isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <button
+          type="button"
+          className={`absolute inset-0 bg-black/40 transition-opacity ${
+            isMobileMenuOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-label="Close menu"
+        />
+
+        <aside
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+          className={`absolute right-0 top-0 z-[9999] h-full w-[85%] max-w-xs bg-white transition-transform duration-300 ${
+            isMobileMenuOpen ? "translate-x-0 shadow-2xl" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
+            <div className="text-lg font-semibold text-primary">Menu</div>
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="rounded-full p-2 text-neutral-600 hover:bg-neutral-100"
+              aria-label="Close menu"
+            >
+              <X size={18} />
+            </button>
+          </div>
+
+          <nav className="flex flex-col p-5 bg-white">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center justify-between border-b border-neutral-100 py-4 text-base transition-colors ${
+                  pathname === item.href
+                    ? "text-primary font-medium"
+                    : "text-primary/80"
+                }`}
+              >
+                <span>{item.name}</span>
+                {item.hasDropdown && <ChevronDown size={16} />}
+              </Link>
+            ))}
+          </nav>
+        </aside>
+      </div>,
+      document.body
+    );
+
   return (
-    <header className="bg-white w-full relative">
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between py-5 px-6 lg:px-12">
+    <>
+      <header className="bg-white w-full relative">
+        <div className="max-w-[1400px] mx-auto flex items-center justify-between py-5 px-6 lg:px-12">
         {/* Logo */}
         <div className="shrink-0">
           <div className="flex flex-col">
@@ -130,65 +198,9 @@ export default function Header() {
             </span>
           </button>
         </div>
-      </div>
-
-      <div
-        className={`md:hidden fixed inset-0 z-[9998] overflow-hidden ${
-          isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
-        }`}
-        aria-hidden={!isMobileMenuOpen}
-      >
-        <button
-          type="button"
-          className={`absolute inset-0 bg-black/40 transition-opacity ${
-            isMobileMenuOpen ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-label="Close menu"
-        />
-
-        <aside
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-          className={`absolute right-0 top-0 z-[9999] h-full w-[85%] max-w-xs bg-white opacity-100 transition-transform duration-300 ${
-            isMobileMenuOpen
-              ? "translate-x-0 shadow-2xl"
-              : "translate-x-full shadow-none"
-          }`}
-        >
-          <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
-            <div className="text-lg font-semibold text-primary">Menu</div>
-            <button
-              ref={closeBtnRef}
-              type="button"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="rounded-full p-2 text-neutral-600 hover:bg-neutral-100"
-              aria-label="Close menu"
-            >
-              <X size={18} />
-            </button>
-          </div>
-
-          <nav className="flex flex-col p-5 bg-white">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`flex items-center justify-between border-b border-neutral-100 py-4 text-base transition-colors ${
-                  pathname === item.href
-                    ? "text-primary font-medium"
-                    : "text-primary/80"
-                }`}
-              >
-                <span>{item.name}</span>
-                {item.hasDropdown && <ChevronDown size={16} />}
-              </Link>
-            ))}
-          </nav>
-        </aside>
-      </div>
-    </header>
+        </div>
+      </header>
+      {mobileMenuDrawer}
+    </>
   );
 }
