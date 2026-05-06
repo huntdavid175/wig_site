@@ -14,25 +14,25 @@ const categories: CategoryCard[] = [
   {
     title: "WIGS",
     cta: "SHOP NOW",
-    href: "/wigs",
+    href: "/shop",
     imageUrl: "/images/hair_hero.jpg",
   },
   {
     title: "BUNDLES",
     cta: "SHOP NOW",
-    href: "/bundles",
+    href: "/shop",
     imageUrl: "/images/hair_hero1.png",
   },
   {
     title: "FRONTAL & CLOSURE",
     cta: "SHOP NOW",
-    href: "/frontal-closure",
+    href: "/shop",
     imageUrl: "/images/hair_hero.jpg",
   },
   {
     title: "BUNDLES & CLOSURE DEALS",
     cta: "COMING SOON",
-    href: "/deals",
+    href: "/shop",
     imageUrl: "/images/hair_hero1.png",
   },
 ];
