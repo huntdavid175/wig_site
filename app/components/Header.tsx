@@ -132,12 +132,17 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between py-5 px-6 lg:px-12">
         {/* Logo */}
         <Link href="/" className="shrink-0" aria-label="Go to homepage">
-          <span
-            className="text-3xl font-bold text-primary tracking-tight"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
-            Gyeiwaa
-          </span>
+          <div className="flex flex-col">
+            <span
+              className="text-3xl font-bold text-primary tracking-tight"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              GY
+            </span>
+            <span className="text-[9px] text-primary tracking-[0.25em] uppercase -mt-1 font-medium">
+              Gyeiwaa
+            </span>
+          </div>
         </Link>
 
         {/* Navigation */}
