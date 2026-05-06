@@ -151,9 +151,10 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-xs bg-white opacity-100 shadow-2xl transition-transform duration-300 ${
+          className={`absolute right-0 top-0 z-10 h-full w-[85%] max-w-xs shadow-2xl transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
+          style={{ backgroundColor: "#fff" }}
         >
           <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
             <div className="text-lg font-semibold text-primary">Menu</div>
