@@ -133,7 +133,7 @@ export default function Header() {
       </div>
 
       <div
-        className={`md:hidden fixed inset-0 z-[70] ${
+        className={`md:hidden fixed inset-0 z-[70] overflow-x-hidden ${
           isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         aria-hidden={!isMobileMenuOpen}
@@ -151,8 +151,10 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
-          className={`absolute right-0 top-0 z-10 h-full w-[85%] max-w-xs shadow-2xl transition-transform duration-300 ${
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`absolute right-0 top-0 z-10 h-full w-[85%] max-w-xs transition-transform duration-300 ${
+            isMobileMenuOpen
+              ? "translate-x-0 shadow-2xl"
+              : "translate-x-[110%] shadow-none"
           }`}
           style={{ backgroundColor: "#fff" }}
         >
