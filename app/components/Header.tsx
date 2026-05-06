@@ -10,7 +10,7 @@ const navItems = [
   { name: "Home", href: "/", hasDropdown: false },
   { name: "Shop All", href: "/shop", hasDropdown: false },
   { name: "Our Story", href: "/our-story", hasDropdown: false },
-  { name: "Pages", href: "#", hasDropdown: true },
+  // { name: "Pages", href: "#", hasDropdown: true },
 ];
 
 export default function Header() {
