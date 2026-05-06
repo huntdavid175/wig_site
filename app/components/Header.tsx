@@ -169,7 +169,7 @@ export default function Header() {
             </button>
           </div>
 
-          <nav className="flex flex-col p-5">
+          <nav className="flex flex-col p-5 bg-white">
             {navItems.map((item) => (
               <Link
                 key={item.name}
